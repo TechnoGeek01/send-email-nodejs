@@ -1,22 +1,19 @@
-require('dotenv').config();
-require('express-async-errors');
-const notFoundMiddleware = require('./middleware/not-found');
-const errorHandlerMiddleware = require('./middleware/error-handler');
-const express = require('express');
-const sendEmail=require("./controllers/sendEmail")
-
-
+require("dotenv").config();
+require("express-async-errors");
+const notFoundMiddleware = require("./middleware/not-found");
+const errorHandlerMiddleware = require("./middleware/error-handler");
+const express = require("express");
+const sendEmail = require("./controllers/sendEmail");
 
 const app = express();
 app.use(express.json());
 
 // routes
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send('<h1>Email Project</h1> <a href="/send">send email</a>');
 });
 
-app.get("/send",sendEmail)
-
+app.get("/send", sendEmail);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
@@ -34,4 +31,3 @@ const start = async () => {
 };
 
 start();
- 
